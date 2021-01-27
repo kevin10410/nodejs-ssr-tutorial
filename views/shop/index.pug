@@ -1,1 +1,27 @@
 extends ../layouts/main-layout.pug
+
+block content
+  main
+    if products.length > 0
+      .grid
+        each product in products
+          article.card.product-item
+            header.card__header
+              h1.product__title #{ product.title }
+              .card__image
+                img(
+                  alt = product.title
+                  src = product.imageUrl
+                )
+              .card__content
+                h2.product__price #{ product.price }
+                p.product__description #{ product.description }
+              .card__actions
+                a.btn(href="") Details
+                form(
+                  method="POST"
+                  action="/add-to-cart"
+                )
+                  button.btn(type="submit") Add to Cart
+    else
+      h1 No Products Found!
