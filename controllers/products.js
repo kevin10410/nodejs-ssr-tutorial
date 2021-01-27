@@ -1,10 +1,10 @@
-const products = [];
+const Product = require('../models/products');
 
 function getShop (req, res, next) {
   res.render('shop', {
     path: '/',
     docTitle: 'Shop',
-    products,
+    products: Product.fetchAll(),
   });
 };
 
@@ -16,12 +16,12 @@ function getAddProduct (req, res, next) {
 };
 
 function postAddProduct (req, res, next) {
-  products.push({ title: req.body.title });
+  const product = new Product(req.body.title);
+  product.save();
   res.redirect('/');
 };
 
 module.exports = {
-  products,
   getShop,
   getAddProduct,
   postAddProduct,
