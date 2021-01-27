@@ -1,15 +1,5 @@
 const Product = require('../models/products');
 
-function getShop (req, res, next) {
-  Product.fetchAll(products => {
-    res.render('shop/index', {
-      path: '/',
-      docTitle: 'Shop',
-      products,
-    });
-  });
-};
-
 function getAddProduct (req, res, next) {
   res.render('admin/add-product', {
     docTitle: 'Add Product',
@@ -24,7 +14,6 @@ function postAddProduct (req, res, next) {
 };
 
 module.exports = {
-  getShop,
   getAddProduct,
   postAddProduct,
 };
