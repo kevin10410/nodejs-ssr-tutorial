@@ -8,7 +8,9 @@ function getAddProduct (req, res, next) {
 };
 
 function postAddProduct (req, res, next) {
-  const product = new Product(req.body.title);
+  const { body } = req;
+  const { title, imageUrl, price, description } = body;
+  const product = new Product(title, imageUrl, price, description);
   product.save();
   res.redirect('/');
 };

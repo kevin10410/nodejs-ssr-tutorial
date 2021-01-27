@@ -8,8 +8,11 @@ const jsonFilePath = path.join(
 );
 
 module.exports = class Product {
-  constructor(title) {
+  constructor(title, imageUrl, description, price) {
     this.title = title;
+    this.price = price;
+    this.imageUrl = imageUrl;
+    this.description = description;
   };
 
   static fetchAll(cb) {
