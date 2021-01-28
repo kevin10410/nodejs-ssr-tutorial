@@ -22,8 +22,4 @@ block content
                 p.product__description #{ product.description }
               .card__actions
                 a.btn(href="/products/" + product.id) Details
-                form(
-                  method="post"
-                  action="/add-to-cart"
-                )
-                  button.btn(type="submit") Add to Cart
+                include ../layouts/add-to-cart.pug

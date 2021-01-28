@@ -37,6 +37,11 @@ function getCart (req, res, next) {
   });
 };
 
+function postCart (req, res, next) {
+  const { id } = req.body;
+  console.log(id);
+};
+
 function getOrders (req, res, next) {
   res.render('shop/orders', {
     path: '/orders',
@@ -53,6 +58,7 @@ function getCheckout (req, res, next) {
 
 module.exports = {
   getCart,
+  postCart,
   getIndex,
   getOrders,
   getProduct,
