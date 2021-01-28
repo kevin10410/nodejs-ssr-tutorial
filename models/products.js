@@ -7,6 +7,16 @@ const jsonFilePath = path.join(
   'products.json',
 );
 
+function getProductsFromFile (cb) {
+  fs.readFile(jsonFilePath, (err, content) => {
+    if (err) {
+      cb([]);
+    } else {
+      cb(JSON.parse(content))
+    }
+  });
+};
+
 module.exports = class Product {
   constructor(title, imageUrl, description, price) {
     this.title = title;
@@ -16,20 +26,22 @@ module.exports = class Product {
   };
 
   static fetchAll(cb) {
-    fs.readFile(jsonFilePath, (err, content) => {
-      if (err) {
-        cb([]);
-      } else {
-        cb(JSON.parse(content))
-      }
+    getProductsFromFile(cb);
+  };
+
+  static findById(id, cb) {
+    getProductsFromFile(products => {
+      const product = products
+        .find(prod => prod.id === id);
+
+      cb(product);
     });
   };
 
   save() {
     this.id = Math.random().toString().replace(/^0\./, '');
 
-    fs.readFile(jsonFilePath, (err, content) => {
-      let products = err ? [] : JSON.parse(content);
+    getProductsFromFile(products => {
       products.push(this);
 
       fs.writeFile(

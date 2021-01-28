@@ -1,0 +1,18 @@
+extends ../layouts/main-layout.pug
+
+block content
+  main.centered
+    h1 #{ product.title }
+    hr
+    div
+      img(
+        alt = product.title
+        src = product.imageUrl
+      )
+    h2 #{ product.price }
+    p #{ product.description }
+    form(
+      method="post"
+      action="/cart"
+    )
+      button.btn(type="submit") Add to Cart
