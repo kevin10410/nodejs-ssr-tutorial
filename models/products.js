@@ -1,11 +1,8 @@
 const fs = require('fs');
+const { getJSONDataPath } = require('../util/path');
 const path = require('path');
 
-const jsonFilePath = path.join(
-  path.dirname(require.main.filename),
-  'data',
-  'products.json',
-);
+const jsonFilePath = getJSONDataPath('products');
 
 function getProductsFromFile (cb) {
   fs.readFile(jsonFilePath, (err, content) => {
