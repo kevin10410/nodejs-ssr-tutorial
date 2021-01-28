@@ -20,6 +20,12 @@ function getProducts (req, res, next) {
   });
 };
 
+function getProduct (req, res, next) {
+  const { id } = req.params;
+  console.log(id);
+  res.redirect('/');
+};
+
 function getCart (req, res, next) {
   res.render('shop/cart', {
     path: '/cart',
@@ -45,6 +51,7 @@ module.exports = {
   getCart,
   getIndex,
   getOrders,
+  getProduct,
   getCheckout,
   getProducts,
 };

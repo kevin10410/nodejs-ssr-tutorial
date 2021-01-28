@@ -26,6 +26,8 @@ module.exports = class Product {
   };
 
   save() {
+    this.id = Math.random().toString().replace(/^0\./, '');
+
     fs.readFile(jsonFilePath, (err, content) => {
       let products = err ? [] : JSON.parse(content);
       products.push(this);
