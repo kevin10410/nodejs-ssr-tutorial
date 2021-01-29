@@ -58,6 +58,7 @@ module.exports = class Product {
 
     getProductsFromFile(products => {
       products.push(this);
+      console.log('products', products);
 
       fs.writeFile(
         jsonFilePath,
