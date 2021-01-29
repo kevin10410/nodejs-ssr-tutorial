@@ -45,7 +45,7 @@ function getCart (req, res, next) {
 function postCart (req, res, next) {
   const { id } = req.body;
   Product.findById(id, product => {
-    Cart.addProdoct(id, product.price);
+    Cart.addProduct(id, product.price);
     res.redirect('/cart');
   });
 };

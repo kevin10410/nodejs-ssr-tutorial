@@ -28,4 +28,9 @@ block content
                   method = "post"
                   action = "/admin/delete-product"
                 )
+                  input(
+                    name = "id"
+                    type="hidden"
+                    value = product.id
+                  )
                   button.btn(type="submit") Delete

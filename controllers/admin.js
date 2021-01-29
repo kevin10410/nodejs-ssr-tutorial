@@ -46,10 +46,17 @@ function getAdminProduct (req, res, next) {
   });
 };
 
+function postDeleteProduct (req, res, next) {
+  const { id } = req.body;
+  Product.deleteById(id);
+  res.redirect('/admin/products');
+};
+
 module.exports = {
   getAddProduct,
   getEditProduct,
   postAddProduct,
   postEditProduct,
   getAdminProduct,
+  postDeleteProduct,
 };

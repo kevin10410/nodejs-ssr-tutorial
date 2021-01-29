@@ -14,7 +14,7 @@ function getCartProdocts (cb) {
 }
 
 module.exports = class Cart {
-  static addProdoct (id, price) {
+  static addProduct (id, price) {
     getCartProdocts(cart => {
       const index = cart.products
         .findIndex(prod => prod.id === id);
@@ -35,5 +35,24 @@ module.exports = class Cart {
         err => { console.log(err) }
       );
     });
-  }
+  };
+
+  static deleteProduct(id, price) {
+    getCartProdocts(cart => {
+      const index = cart.products
+        .findIndex(prod => prod.id === id);
+
+      if (index === -1) return;
+
+      const { qty } = cart.products[index];
+      cart.products.splice(index, 1);
+      cart.totalPrice -= qty * +price;
+
+      fs.writeFile(
+        jsonFilePath,
+        JSON.stringify(cart),
+        err => { console.log(err) }
+      );
+    });
+  };
 };
