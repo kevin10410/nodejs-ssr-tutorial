@@ -36,9 +36,27 @@ function getProduct (req, res, next) {
 };
 
 function getCart (req, res, next) {
-  res.render('shop/cart', {
-    path: '/cart',
-    docTitle: 'Your Cart',
+  Cart.getProducts(cart => {
+    Product.fetchAll(products => {
+      let cartProducts = [];
+
+      for (prod of cart.products) {
+        const product = products
+          .find(item => item.id === prod.id);
+
+        cartProducts.push({
+          ...product,
+          qty: prod.qty,
+        })
+      }
+
+      res.render('shop/cart', {
+        path: '/cart',
+        docTitle: 'Your Cart',
+        products: cartProducts,
+        totalPrice: cart.totalPrice,
+      });
+    });
   });
 };
 

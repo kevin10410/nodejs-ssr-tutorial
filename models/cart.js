@@ -3,7 +3,7 @@ const { getJSONDataPath } = require('../util/path');
 
 const jsonFilePath = getJSONDataPath('cart')
 
-function getCartProdocts (cb) {
+function getCartFromFile (cb) {
   fs.readFile(jsonFilePath, (err, content) => {
     if (err) {
       cb({ products: [], totalPrice: 0 });
@@ -14,8 +14,12 @@ function getCartProdocts (cb) {
 }
 
 module.exports = class Cart {
+  static getProducts (cb) {
+    getCartFromFile(cart => { cb(cart)} )
+  };
+
   static addProduct (id, price) {
-    getCartProdocts(cart => {
+    getCartFromFile(cart => {
       const index = cart.products
         .findIndex(prod => prod.id === id);
 
@@ -38,7 +42,7 @@ module.exports = class Cart {
   };
 
   static deleteProduct(id, price) {
-    getCartProdocts(cart => {
+    getCartFromFile(cart => {
       const index = cart.products
         .findIndex(prod => prod.id === id);
 
