@@ -9,7 +9,6 @@ function getAddProduct (req, res, next) {
 
 function getEditProduct (req, res, next) {
   const { id } = req.params;
-  console.log(id);
   Product.findById(id, product => {
     res.render('admin/edit-product', {
       docTitle: 'Edit Product',
@@ -22,9 +21,19 @@ function getEditProduct (req, res, next) {
 function postAddProduct (req, res, next) {
   const { body } = req;
   const { title, imageUrl, price, description } = body;
-  const product = new Product(title, imageUrl, price, description);
+  const product = new Product(null, title, imageUrl, price, description);
   product.save();
   res.redirect('/');
+};
+
+function postEditProduct (req, res, next) {
+  const { body } = req;
+  const { id } = req.params;
+  const { title, imageUrl, price, description } = body;
+  const updateProduct = new Product(id, title, imageUrl, price, description);
+  updateProduct.update();
+
+  res.redirect('/admin/products')
 };
 
 function getAdminProduct (req, res, next) {
@@ -41,5 +50,6 @@ module.exports = {
   getAddProduct,
   getEditProduct,
   postAddProduct,
+  postEditProduct,
   getAdminProduct,
 };

@@ -15,7 +15,8 @@ function getProductsFromFile (cb) {
 };
 
 module.exports = class Product {
-  constructor(title, imageUrl, price, description) {
+  constructor(id, title, imageUrl, price, description) {
+    this.id = id;
     this.title = title;
     this.price = price;
     this.imageUrl = imageUrl;
@@ -48,4 +49,19 @@ module.exports = class Product {
       );
     });
   };
+
+  update() {
+    getProductsFromFile(products => {
+      const index = products
+        .findIndex(product => product.id === this.id);
+
+      products.splice(index, 1, this);
+
+      fs.writeFile(
+        jsonFilePath,
+        JSON.stringify(products),
+        err => { console.log(err) }
+      );
+    });
+  }
 };
