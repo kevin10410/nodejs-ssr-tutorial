@@ -1,9 +1,21 @@
 const Product = require('../models/products');
 
 function getAddProduct (req, res, next) {
-  res.render('admin/add-product', {
+  res.render('admin/edit-product', {
     docTitle: 'Add Product',
     path:'/admin/add-product',
+  });
+};
+
+function getEditProduct (req, res, next) {
+  const { id } = req.params;
+  console.log(id);
+  Product.findById(id, product => {
+    res.render('admin/edit-product', {
+      docTitle: 'Edit Product',
+      edit: true,
+      product,
+    });
   });
 };
 
@@ -27,6 +39,7 @@ function getAdminProduct (req, res, next) {
 
 module.exports = {
   getAddProduct,
+  getEditProduct,
   postAddProduct,
   getAdminProduct,
 };

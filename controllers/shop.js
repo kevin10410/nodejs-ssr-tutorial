@@ -24,10 +24,14 @@ function getProducts (req, res, next) {
 function getProduct (req, res, next) {
   const { id } = req.params;
   Product.findById(id, product => {
-    res.render('shop/productDetail', {
-      product,
-      docTitle: product.title,
-    });
+    if (product) {
+      res.render('shop/productDetail', {
+        product,
+        docTitle: product.title,
+      });
+    } else {
+      res.redirect('/')
+    }
   });
 };
 
