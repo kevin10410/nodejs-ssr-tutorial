@@ -7,6 +7,7 @@ const {
   getProduct,
   getCheckout,
   getProducts,
+  postOrder,
   postDeleteCartItem,
 } = require('../controllers/shop');
 
@@ -20,5 +21,6 @@ router.get('/products', getProducts);
 router.get('/products/:id', getProduct);
 router.post('/cart', postCart);
 router.post('/delete-cart-item', postDeleteCartItem);
+router.post('/create-order', postOrder);
 
 module.exports = router;
